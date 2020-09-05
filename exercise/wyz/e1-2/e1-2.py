@@ -22,7 +22,8 @@ def setLevel(area, level:int):
     
 
 def main():
-    level = 64
+    n = 4 # input your intensity here
+    level = 2 ** n
     area = setLevel(intensityDistrib(), level)
     plt.imshow(area, cmap='gray')
     plt.colorbar()

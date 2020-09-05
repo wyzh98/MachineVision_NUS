@@ -20,7 +20,6 @@ def setLevel(area, level:int):
         area_thr += (i+1) * length * (area > i*length) * (area <= (i+1)*length)
     return area_thr
     
-
 def main():
     n = 4 # input your intensity here
     level = 2 ** n
@@ -29,7 +28,6 @@ def main():
     plt.colorbar()
     plt.title('Intensity level: ' + str(level))
     plt.show()
-
 
 if __name__ == '__main__':
     main()

@@ -1,8 +1,8 @@
 clear;
 %% Encoder
 MODE = 1;
-charpath = '.\assignment\charact1.txt';
-fileID = fopen(charpath);
+CHARPATH = '.\assignment\charact1.txt';
+fileID = fopen(CHARPATH);
 char = fscanf(fileID, '%s', [64, 64]);
 fclose(fileID);
 
@@ -12,8 +12,9 @@ img = char2num(char');
 
 %% Solutions
 % Q1: Display the original image on screen
-imshow(img, [0, 31]); % Display the grayscale image that ranges [0, 31]
+show_img(img, MODE);
+
 % Q2: Create a binary image using thresholding
-imgBinary = img2binary(img, MODE);
-figure();
-imshow(imgBinary);
+img2binary(img);
+
+

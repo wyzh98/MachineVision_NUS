@@ -1,4 +1,5 @@
-function imgbHist = img2binary(img)
+function imgbHist = img2binary(img, mode)
+% Q2. Output the binary image
 %% Use mean of each pixel thresholding
 thrAve = mean(img, 'all');
 
@@ -8,21 +9,27 @@ minIdx = min(img,[],'all') + 1;
 maxIdx = max(img,[],'all') + 1;
 medIdx = round((minIdx + maxIdx) / 2);
 for i = minIdx:maxIdx
-    A(i) = sum(img == i, 'all');
+    histGray(i) = sum(img == i, 'all');
 end
-[~, leftIdx] = max(A(1:medIdx));
-[~, rightIdx] = max(A((medIdx+1):maxIdx));
+[~, leftIdx] = max(histGray(1:medIdx));
+[~, rightIdx] = max(histGray((medIdx+1):maxIdx));
 thrHist = leftIdx + rightIdx;
 %% Use Otsu method
-thrOtsu = graythresh(img) * 256;
+if mode == 1
+    s = 32;
+elseif mode == 2
+    s = 256;
+end
+thrOtsu = graythresh(img) * s;
+
 %% Compare and plot
 imgbAveg = img > thrAve;
 imgbHist = img > thrHist;
 imgbOtsu = img > thrOtsu;
 
-figure();
-subplot(1,3,1), imshow(imgbAveg), h1 = title(['Threshold = ', num2str(thrAve)]);
-subplot(1,3,2), imshow(imgbHist), h2 = title(['Threshold = ', num2str(thrHist)]);
-subplot(1,3,3), imshow(imgbHist), h3 = title(['Threshold = ', num2str(thrOtsu)]);
+figure(2);
+subplot(131), imshow(imgbAveg), h1 = title(['Threshold = ', num2str(thrAve)]);
+subplot(132), imshow(imgbHist), h2 = title(['Threshold = ', num2str(thrHist)]);
+subplot(133), imshow(imgbOtsu), h3 = title(['Threshold = ', num2str(thrOtsu)]);
 h0 = sgtitle('Binary Image using different thresholding methods');
 set([h0, h1, h2, h3], 'Interpreter', 'latex');

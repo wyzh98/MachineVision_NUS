@@ -11,4 +11,4 @@ show_img(img, MODE);
 img = rgb2gray(img);
 
 % Q2: Create a binary image using thresholding
-imgBinary = img2binary(img);
+imgBinary = img2binary(img, MODE);

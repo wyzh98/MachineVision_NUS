@@ -15,6 +15,6 @@ img = char2num(char');
 show_img(img, MODE);
 
 % Q2: Create a binary image using thresholding
-img2binary(img);
+img2binary(img, MODE);
 
 

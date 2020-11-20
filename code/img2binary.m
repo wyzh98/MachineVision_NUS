@@ -1,4 +1,4 @@
-function imgbHist = img2binary(img)
+function imgbHist = img2binary(img, mode)
 % Q2. Output the binary image
 %% Use mean of each pixel thresholding
 thrAve = mean(img, 'all');
@@ -15,14 +15,17 @@ end
 [~, rightIdx] = max(histGray((medIdx+1):maxIdx));
 thrHist = leftIdx + rightIdx;
 %% Use Otsu method
-thrOtsu = graythresh(img) * 256;
-
+if mode == 1
+    thrOtsu = graythresh(img) * 32;
+elseif mode == 2
+	thrOtsu = graythresh(img) * 256;
+end
 %% Compare and plot
 imgbAveg = img > thrAve;
 imgbHist = img > thrHist;
 imgbOtsu = img > thrOtsu;
 
-figure(2);
+figure();
 subplot(131), imshow(imgbAveg, 'InitialMagnification', 'fit'), h1 = title(['Threshold = ', num2str(thrAve)]);
 subplot(132), imshow(imgbHist, 'InitialMagnification', 'fit'), h2 = title(['Threshold = ', num2str(thrHist)]);
 subplot(133), imshow(imgbOtsu, 'InitialMagnification', 'fit'), h3 = title(['Threshold = ', num2str(thrOtsu)]);

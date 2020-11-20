@@ -13,7 +13,7 @@ for k = 1:size(border, 2)
             x = temp(1, 1);
             y = round(y);
             x = round(x);                                               
-            if(x >= 1 && x <= col) && (y >= 1 && y <= row)                               
+            if(x >= 1 && x <= col) && (y >= 1 && y <= row)                              
                imgRotate(y, x, :) = img(j, i, :);
             end
         end
@@ -21,5 +21,5 @@ for k = 1:size(border, 2)
 end
 figure();
 imshow(imgRotate, 'InitialMagnification', 'fit')    
-h1 = title('Rotation');
+h1 = title(['Rotate ', num2str(degree), ' degrees']);
 set(h1, 'Interpreter', 'latex');

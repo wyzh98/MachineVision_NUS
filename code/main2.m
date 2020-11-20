@@ -1,18 +1,19 @@
 clc; clear;
 %% Encoder & preprocessing
-FIGPATH  = 'charact2.jpg';
-img = imread(FIGPATH);
-img = rot90(img, 2); % Rotate the image by 180 degrees (can be realized manually)
-
+FILEPATH  = 'charact2.jpg';
+mode = 2;
+img = imread(FILEPATH);
+rgbhist(img);
 %% Q1 display
-show_img(img);
-img = rgb2gray(img);
+img = im2double(img);
+img = rotate(img, {[1,size(img,1),1,size(img,2)]}, 180);
+img = rgb2gray(im2uint8(img));
 
 %% Q2 Binarization
-imgBinary = img2binary(img);
+imgBinary = img2binary(img, mode);
 
 %% Q3 Segmentation
-border = segment(imgBinary);
+border = segment(imgBinary, mode);
 
 %% Q4/5 Rotation
 imgRot90 = rotate(imgBinary, border, 90);
@@ -28,4 +29,4 @@ imgOutline = extract_outline(imgBinary);
 imgThin = thinning(imgBinary);
 
 %% Q8 Arrangement
-imgArr = arr_char(imgBinary,border);
+imgArr = arr_char(imgBinary, border, mode);

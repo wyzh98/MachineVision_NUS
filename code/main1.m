@@ -1,6 +1,7 @@
 clc; clear;
 %% Encoder & preprocessing
 FILEPATH = 'charact1.txt';
+mode = 1;
 fileID = fopen(FILEPATH);
 char = fscanf(fileID, '%s', [64, 64]);
 fclose(fileID);
@@ -13,10 +14,10 @@ img = char2num(char');
 show_img(img);
 
 %% Q2 Binarization
-imgBinary = img2binary(img);
+imgBinary = img2binary(img, mode);
 
 %% Q3 Segmentation
-border = segment(imgBinary);
+border = segment(imgBinary, mode);
 
 %% Q4/5 Rotation
 imgRot90 = rotate(imgBinary, border, 90);
@@ -32,4 +33,4 @@ imgOutline = extract_outline(imgBinary);
 imgThin = thinning(imgBinary);
 
 %% Q8 Arrangement
-imgArr = arr_char(imgBinary,border);
+imgArr = arr_char(imgBinary, border, mode);
